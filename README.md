@@ -7,14 +7,14 @@ Final score: **0.98023** (inside the public-LB plateau, up from 0.96001 at v1).
 ## Key findings
 
 The target was generated from a deterministic rule on 6 features (4 thresholds + 2 stage/mulch dummies), with ~1.85% label noise added by the generator. Initially, the other 6 categorical columns look like noise, but they truned out to be important.
-While the noisy categoricals seemed useless at first, they contaiend some signal that helped break the 0.97 treshold.
+While the noisy categoricals seemed useless at first, they contained some signal that helped break the 0.97 threshold.
 The generator also distorted feature distributions, especially `Rainfall_mm` (KS = 0.158 vs original). An "original-only" trained model performs worse on synthetic test (0.957) than a model trained directly on synthetic data (0.967), a distribution shift.
 
 ## Two steps
 
 **Phase 1 (v1 → v11): incremental gains on a small feature set, 0.96001 → 0.97061.** Mostly conservative methodology — class weights, K-fold, stacking, bounded tuning. Each step verified before moving on. Hit a ceiling at 0.97 because I over-pruned features.
 
-**Phase 2 (v12): big jump from inspecting a public 0.98109 OOF notebook, 0.97061 → 0.98023.** A community member published a notebook hitting OOF 0.98109 with a single XGBoost. Apparantly a much simpler approche did much better than me.
+**Phase 2 (v12): big jump from inspecting a public 0.98109 OOF notebook, 0.97061 → 0.98023.** A community member published a notebook hitting OOF 0.98109 with a single XGBoost. Apparently a much simpler approach did much better than me.
 What they did differently was mass feature engineering plus *in-fold multiclass target encoding on every column*, including the categoricals I had dropped as noise. 
 The public notebook by [rawashishsin](https://www.kaggle.com/code/rawashishsin/s6e4-highest-score-xgboost-cv-0-98109) gave me the feature-engineering and target-encoding pipeline that my final version used, I do not think I would have broken 0.98 without it.
 
