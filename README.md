@@ -10,7 +10,7 @@ The target was generated from a deterministic rule on 6 features (4 thresholds +
 While the noisy categoricals seemed useless at first, they contaiend some signal that helped break the 0.97 treshold.
 The generator also distorted feature distributions, especially `Rainfall_mm` (KS = 0.158 vs original). An "original-only" trained model performs worse on synthetic test (0.957) than a model trained directly on synthetic data (0.967), a distribution shift.
 
-## Two phases of the journey
+## Two steps
 
 **Phase 1 (v1 → v11): incremental gains on a small feature set, 0.96001 → 0.97061.** Mostly conservative methodology — class weights, K-fold, stacking, bounded tuning. Each step verified before moving on. Hit a ceiling at 0.97 because I over-pruned features.
 
